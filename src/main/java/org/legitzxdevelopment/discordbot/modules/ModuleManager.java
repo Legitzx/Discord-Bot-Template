@@ -46,9 +46,13 @@ public class ModuleManager {
         String searchLower = search.toLowerCase();
 
         for(IModule module : modules) {
-            for(ICommand cmd : module.getCommands()) {
-                if(cmd.getName().equalsIgnoreCase(searchLower)) {
-                    return cmd;
+            if(module.isActive()) {
+                for(ICommand cmd : module.getCommands()) {
+                    if(cmd.isActive()) {
+                        if(cmd.getName().equalsIgnoreCase(searchLower)) {
+                            return cmd;
+                        }
+                    }
                 }
             }
         }

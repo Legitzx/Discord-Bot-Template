@@ -13,4 +13,9 @@ public class SomeCommand implements ICommand {
     public String getName() {
         return "example";
     }
+
+    @Override
+    public boolean isActive() {
+        return true;
+    }
 }

@@ -11,5 +11,7 @@ public interface IModule {
 
     String getName();
 
+    boolean isActive();
+
     List<ICommand> getCommands();
 }

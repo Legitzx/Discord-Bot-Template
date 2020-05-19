@@ -18,6 +18,11 @@ public class ExampleModule implements IModule {
     }
 
     @Override
+    public boolean isActive() {
+        return true;
+    }
+
+    @Override
     public List<ICommand> getCommands() {
         return commands;
     }
