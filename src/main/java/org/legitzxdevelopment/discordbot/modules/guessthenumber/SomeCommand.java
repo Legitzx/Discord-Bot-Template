@@ -20,6 +20,11 @@ public class SomeCommand implements ICommand {
     }
 
     @Override
+    public String getUsage() {
+        return "example [@user] [reason]";
+    }
+
+    @Override
     public boolean isActive() {
         return true;
     }

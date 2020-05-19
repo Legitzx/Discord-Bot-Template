@@ -65,7 +65,28 @@ public class CommandDispatcher extends ListenerAdapter {
         String prefix = Config.get("prefix");
         String raw = event.getMessage().getContentRaw();
 
-        // Shutdown command
+        // Auto Generated Help Command
+        if(raw.equalsIgnoreCase(prefix + "help")) {
+            EmbedBuilder builder = new EmbedBuilder();
+            builder.setTitle("Help");
+
+            for(IModule module : moduleManager.getModules()) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for(ICommand cmd : module.getCommands()) {
+                    if(cmd.isActive()) {
+                        stringBuilder.append(prefix + cmd.getUsage() + "\n");
+                    }
+                }
+
+                builder.addField(module.getName(), stringBuilder.toString(), true);
+            }
+
+            builder.setColor(Color.CYAN);
+
+            event.getChannel().sendMessage(builder.build()).queue();
+        }
+
+        // Shutdown command - Shuts down the bot
         if(raw.equalsIgnoreCase(prefix + "shutdown")
                 && user.getId().equals(Config.get("owner_id"))) {
             //executor.shutdown();
@@ -76,7 +97,7 @@ public class CommandDispatcher extends ListenerAdapter {
             return;
         }
 
-        // Info command
+        // Info command - Displays Memory info
         if(raw.equalsIgnoreCase(prefix + "info")
                 && user.getId().equals(Config.get("owner_id"))) {
             EmbedBuilder builder = new EmbedBuilder();
@@ -107,6 +128,7 @@ public class CommandDispatcher extends ListenerAdapter {
             return;
         }
 
+        // Sends out requests to all the modules
         if(raw.startsWith(prefix)) {
             moduleManager.handle(event);
         }

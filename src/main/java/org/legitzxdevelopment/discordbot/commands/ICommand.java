@@ -10,5 +10,7 @@ public interface ICommand {
 
     String getName();
 
+    String getUsage(); // Used when building help embed
+
     boolean isActive(); // True = Enabled, False = Disabled
 }
