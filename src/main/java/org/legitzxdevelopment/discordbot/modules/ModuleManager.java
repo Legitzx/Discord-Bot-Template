@@ -13,14 +13,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/*
+Made by: LEGITZX
+Legitzx Development © 2020
+ */
+
 public class ModuleManager {
     // List of Modules
     private final List<IModule> modules = new ArrayList<>();
 
+    // Register modules
     public ModuleManager(Bot bot) {
         addModule(new ExampleModule(bot, this));
     }
 
+    /**
+     * Description: Method that allows you to add modules
+     * @param module        Module that is being added
+     */
     private void addModule(IModule module) {
         boolean nameFound = this.modules.stream().anyMatch((it) -> it.getName().equalsIgnoreCase(module.getName()));
 
@@ -31,6 +41,11 @@ public class ModuleManager {
         modules.add(module);
     }
 
+    /**
+     * Description: Method that allows you to add commands to your module
+     * @param module        Module that you're adding the command to
+     * @param cmd           Command that you're adding
+     */
     public void addCommand(IModule module, ICommand cmd) {
         boolean nameFound = module.getCommands().stream().anyMatch((it) -> it.getName().equalsIgnoreCase(cmd.getName()));
 
@@ -41,6 +56,11 @@ public class ModuleManager {
         module.getCommands().add(cmd);
     }
 
+    /**
+     * Description: Searches the through the different modules for a command.
+     * @param search        Command that will be searched for
+     * @return              Returns the command if present, else it will return null
+     */
     @Nullable
     private ICommand getCommand(String search) {
         String searchLower = search.toLowerCase();
@@ -60,6 +80,10 @@ public class ModuleManager {
         return null;
     }
 
+    /**
+     * Description: This will handle command executing for all commands
+     * @param event         JDA Event.
+     */
     public void handle(GuildMessageReceivedEvent event) {
         String[] split = event.getMessage().getContentRaw()
                 .replaceFirst("(?i)" + Pattern.quote(Config.get("prefix")), "")
@@ -76,5 +100,9 @@ public class ModuleManager {
 
             cmd.handle(ctx);
         }
+    }
+
+    public List<IModule> getModules() {
+        return modules;
     }
 }

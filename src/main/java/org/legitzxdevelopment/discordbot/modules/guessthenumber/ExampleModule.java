@@ -7,6 +7,11 @@ import org.legitzxdevelopment.discordbot.modules.ModuleManager;
 
 import java.util.List;
 
+/*
+Made by: LEGITZX
+Legitzx Development © 2020
+ */
+
 public class ExampleModule implements IModule {
     public ExampleModule(Bot bot, ModuleManager moduleManager) {
         moduleManager.addCommand(this, new SomeCommand());

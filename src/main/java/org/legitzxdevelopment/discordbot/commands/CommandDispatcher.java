@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.ReadyEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.legitzxdevelopment.discordbot.Bot;
+import org.legitzxdevelopment.discordbot.modules.IModule;
 import org.legitzxdevelopment.discordbot.modules.ModuleManager;
 import org.legitzxdevelopment.discordbot.utils.Config;
 import org.slf4j.Logger;
@@ -17,10 +18,12 @@ import java.awt.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 
-public class CommandDispatcher extends ListenerAdapter {
-    // Bot this class belongs to
-    private Bot bot;
+/*
+Made by: LEGITZX
+Legitzx Development © 2020
+ */
 
+public class CommandDispatcher extends ListenerAdapter {
     // Logger
     private static final Logger LOGGER = LoggerFactory.getLogger(CommandDispatcher.class);
 
@@ -31,14 +34,28 @@ public class CommandDispatcher extends ListenerAdapter {
         moduleManager = new ModuleManager(bot);
     }
 
+    /**
+     * Description: Displays the status of the bot/status of each module
+     * @param event
+     */
     @Override
     public void onReady(@Nonnull ReadyEvent event) {
         LOGGER.info("{} is ready", event.getJDA().getSelfUser().getAsTag());
+
+        // Displays the status of each module/command
+        LOGGER.info("-------------------------------------");
+        for(IModule module : moduleManager.getModules()) {
+            LOGGER.info(module.getName() + " : " + module.isActive());
+            for(ICommand cmd : module.getCommands()) {
+                LOGGER.info("   " + cmd.getName() + " : " + cmd.isActive());
+            }
+        }
+        LOGGER.info("-------------------------------------");
     }
 
+    // Main Message Event
     @Override
     public void onGuildMessageReceived(@Nonnull GuildMessageReceivedEvent event) {
-        LOGGER.info("HELLO");
         User user = event.getAuthor();
 
         if(user.isBot() || event.isWebhookMessage()) {

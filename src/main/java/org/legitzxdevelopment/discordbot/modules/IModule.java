@@ -6,12 +6,17 @@ import org.legitzxdevelopment.discordbot.commands.ICommand;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Made by: LEGITZX
+Legitzx Development © 2020
+ */
+
 public interface IModule {
     List<ICommand> commands = new ArrayList<>();
 
     String getName();
 
-    boolean isActive();
+    boolean isActive();  // True = Enabled, False = Disabled
 
-    List<ICommand> getCommands();
+    List<ICommand> getCommands(); // Gets the commands that are registered with this module
 }
