@@ -1,14 +1,16 @@
 package org.legitzxdevelopment.discordbot.commands;
 
 /*
-Made by: LEGITZX
+Made by: Luciano K
 Legitzx Development © 2020
  */
+
+import java.util.List;
 
 public interface ICommand {
     void handle(CommandContext event);
 
-    String getName();
+    List<String> getName();
 
     String getUsage(); // Used when building help embed
 

@@ -3,7 +3,7 @@ package org.legitzxdevelopment.discordbot.utils;
 import io.github.cdimascio.dotenv.Dotenv;
 
 /*
-Made by: LEGITZX
+Made by: Luciano K
 Legitzx Development © 2020
  */
 

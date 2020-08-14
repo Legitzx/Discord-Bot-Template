@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import org.legitzxdevelopment.discordbot.Bot;
 import org.legitzxdevelopment.discordbot.commands.CommandContext;
 import org.legitzxdevelopment.discordbot.commands.ICommand;
-import org.legitzxdevelopment.discordbot.modules.guessthenumber.ExampleModule;
+import org.legitzxdevelopment.discordbot.modules.example.ExampleModule;
 import org.legitzxdevelopment.discordbot.utils.Config;
 
 import javax.annotation.Nullable;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /*
-Made by: LEGITZX
+Made by: Luciano K
 Legitzx Development © 2020
  */
 
@@ -47,12 +47,6 @@ public class ModuleManager {
      * @param cmd           Command that you're adding
      */
     public void addCommand(IModule module, ICommand cmd) {
-        boolean nameFound = module.getCommands().stream().anyMatch((it) -> it.getName().equalsIgnoreCase(cmd.getName()));
-
-        if (nameFound) {
-            throw new IllegalArgumentException("A command with this name is already present");
-        }
-
         module.getCommands().add(cmd);
     }
 
@@ -62,14 +56,29 @@ public class ModuleManager {
      * @return              Returns the command if present, else it will return null
      */
     @Nullable
-    private ICommand getCommand(String search) {
-        String searchLower = search.toLowerCase();
-
+    private ICommand getCommand(String[] search) {
         for(IModule module : modules) {
             if(module.isActive()) {
                 for(ICommand cmd : module.getCommands()) {
                     if(cmd.isActive()) {
-                        if(cmd.getName().equalsIgnoreCase(searchLower)) {
+                        int length = cmd.getName().size();
+                        int searchLength = search.length;
+
+                        if(searchLength < length) {
+                            continue;
+                        }
+
+                        boolean valid = false;
+                        for(int i = 0; i < length; i++) {
+                            if(cmd.getName().get(i).equalsIgnoreCase(search[i])) {
+                                valid = true;
+                            } else {
+                                valid = false;
+                                break;
+                            }
+                        }
+
+                        if(valid) {
                             return cmd;
                         }
                     }
@@ -89,8 +98,7 @@ public class ModuleManager {
                 .replaceFirst("(?i)" + Pattern.quote(Config.get("prefix")), "")
                 .split("\\s+");
 
-        String invoke = split[0].toLowerCase();
-        ICommand cmd = this.getCommand(invoke);
+        ICommand cmd = this.getCommand(split);
 
         if (cmd != null) {
             event.getChannel().sendTyping().queue();

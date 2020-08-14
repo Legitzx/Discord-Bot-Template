@@ -7,7 +7,7 @@ import org.legitzxdevelopment.discordbot.utils.Config;
 import javax.security.auth.login.LoginException;
 
 /*
-Made by: LEGITZX
+Made by: Luciano K
 Legitzx Development © 2020
  */
 

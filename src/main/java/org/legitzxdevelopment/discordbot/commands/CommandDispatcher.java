@@ -19,7 +19,7 @@ import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 
 /*
-Made by: LEGITZX
+Made by: Luciano K
 Legitzx Development © 2020
  */
 

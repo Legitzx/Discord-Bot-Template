@@ -1,4 +1,4 @@
-package org.legitzxdevelopment.discordbot.modules.guessthenumber;
+package org.legitzxdevelopment.discordbot.modules.example;
 
 import org.legitzxdevelopment.discordbot.Bot;
 import org.legitzxdevelopment.discordbot.commands.ICommand;
@@ -8,7 +8,7 @@ import org.legitzxdevelopment.discordbot.modules.ModuleManager;
 import java.util.List;
 
 /*
-Made by: LEGITZX
+Made by: Luciano K
 Legitzx Development © 2020
  */
 
