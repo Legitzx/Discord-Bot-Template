@@ -1,4 +1,8 @@
 # Discord-Bot
 Discord Bot Template using JDA
 
-Has a Module/Command Manager with Examples.
+Features:
+ - Module Manager
+   - Command Manager
+ - Auto Generated Help Command
+ - Config
